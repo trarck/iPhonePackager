@@ -68,16 +68,16 @@
   <ItemGroup>
     <Reference Include="BouncyCastle.Crypto, Version=1.6.1.0, Culture=neutral, PublicKeyToken=0e99375e54769942">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\..\Binaries\ThirdParty\IOS\BouncyCastle.Crypto.dll</HintPath>
+      <HintPath>Libs\BouncyCastle.Crypto.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="Ionic.Zip.Reduced">
-      <HintPath>..\..\..\..\Binaries\DotNET\Ionic.Zip.Reduced.dll</HintPath>
+      <HintPath>Libs\Ionic.Zip.Reduced.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="SysadminsLV.Asn1Parser, Version=1.2.1.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\..\Binaries\ThirdParty\IOS\SysadminsLV.Asn1Parser.dll</HintPath>
+      <HintPath>Libs\SysadminsLV.Asn1Parser.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="System" />
@@ -98,9 +98,6 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="..\..\Shared\MetaData.cs">
-      <Link>Properties\MetaData.cs</Link>
-    </Compile>
     <Compile Include="CodeSigning.cs" />
     <Compile Include="CompileTime.cs" />
     <Compile Include="Config.cs" />
@@ -135,6 +132,12 @@
     </Compile>
     <Compile Include="iPhonePackager.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Properties\MetaData.cs" />
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
     <Compile Include="RPCCommandHelper.cs" />
     <Compile Include="SlowProgressDialog.cs">
       <SubType>Form</SubType>
@@ -201,8 +204,9 @@
       <DependentUpon>PasswordDialog.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
-      <Generator>ResXFileCodeGenerator</Generator>
+      <Generator>PublicResXFileCodeGenerator</Generator>
       <SubType>Designer</SubType>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="SlowProgressDialog.resx">
       <DependentUpon>SlowProgressDialog.cs</DependentUpon>
