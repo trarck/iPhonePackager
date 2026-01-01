@@ -345,7 +345,7 @@
             // 
             // PasswordEdit
             // 
-            this.PasswordEdit.Location = new System.Drawing.Point(38, 20);
+            this.PasswordEdit.Location = new System.Drawing.Point(23, 20);
             this.PasswordEdit.Name = "PasswordEdit";
             this.PasswordEdit.PasswordChar = '*';
             this.PasswordEdit.Size = new System.Drawing.Size(327, 21);
@@ -456,7 +456,7 @@
             // label11
             // 
             this.label11.AutoSize = true;
-            this.label11.Location = new System.Drawing.Point(17, 171);
+            this.label11.Location = new System.Drawing.Point(21, 171);
             this.label11.Name = "label11";
             this.label11.Size = new System.Drawing.Size(155, 12);
             this.label11.TabIndex = 32;
@@ -502,7 +502,7 @@
             // 
             this.BundleIDEdit.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.BundleIDEdit.Location = new System.Drawing.Point(180, 87);
+            this.BundleIDEdit.Location = new System.Drawing.Point(180, 90);
             this.BundleIDEdit.Name = "BundleIDEdit";
             this.BundleIDEdit.Size = new System.Drawing.Size(259, 21);
             this.BundleIDEdit.TabIndex = 27;
@@ -536,7 +536,7 @@
             // 
             // ImportInfoButton
             // 
-            this.ImportInfoButton.Location = new System.Drawing.Point(179, 209);
+            this.ImportInfoButton.Location = new System.Drawing.Point(178, 221);
             this.ImportInfoButton.Name = "ImportInfoButton";
             this.ImportInfoButton.Size = new System.Drawing.Size(122, 21);
             this.ImportInfoButton.TabIndex = 23;
@@ -546,7 +546,7 @@
             // 
             // ExportInfoButton
             // 
-            this.ExportInfoButton.Location = new System.Drawing.Point(51, 209);
+            this.ExportInfoButton.Location = new System.Drawing.Point(50, 221);
             this.ExportInfoButton.Name = "ExportInfoButton";
             this.ExportInfoButton.Size = new System.Drawing.Size(122, 21);
             this.ExportInfoButton.TabIndex = 22;
@@ -557,7 +557,7 @@
             // RBReplaceInfoPList
             // 
             this.RBReplaceInfoPList.AutoSize = true;
-            this.RBReplaceInfoPList.Location = new System.Drawing.Point(19, 188);
+            this.RBReplaceInfoPList.Location = new System.Drawing.Point(18, 200);
             this.RBReplaceInfoPList.Name = "RBReplaceInfoPList";
             this.RBReplaceInfoPList.Size = new System.Drawing.Size(95, 16);
             this.RBReplaceInfoPList.TabIndex = 21;
