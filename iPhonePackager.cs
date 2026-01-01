@@ -165,18 +165,18 @@ namespace iPhonePackager
             if (Arguments.Length == 0)
             {
                 StartVisuals();
-
+                Arguments = new string[] { "resigntool" };
                 // we NEED a project, so show a uproject picker
-                string UProjectFile;
-                string StartingDir = "";
-                if (ToolsHub.ShowOpenFileDialog("Unreal Project Files (*.uproject)|*.uproject;", "IPhonePackager now requires a .uproject file for certificate/provisioning setup", "mobileprovision", "", ref StartingDir, out UProjectFile))
-                {
-                    Arguments = new string[] { UProjectFile };
-                }
-                else
-                {
-                    Arguments = new string[] { "gui" };
-                }
+                //string UProjectFile;
+                //string StartingDir = "";
+                //if (ToolsHub.ShowOpenFileDialog("Unreal Project Files (*.uproject)|*.uproject;", "IPhonePackager now requires a .uproject file for certificate/provisioning setup", "mobileprovision", "", ref StartingDir, out UProjectFile))
+                //{
+                //    Arguments = new string[] { UProjectFile };
+                //}
+                //else
+                //{
+                //    Arguments = new string[] { "resigntool" };
+                //}
             }
 
             if (Arguments.Length == 1)

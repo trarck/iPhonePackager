@@ -67,6 +67,7 @@ namespace iPhonePackager
 			{
 				IPAFilenameEdit.Text = PickedFilename;
 				ImportedPListData = null;
+				SetModifyInfoPListItemValues(true);
 			}
 		}
 
@@ -152,11 +153,102 @@ namespace iPhonePackager
 			ExportInfoButton.Enabled = RBReplaceInfoPList.Checked;
 			DisplayNameEdit.Enabled = RBModifyInfoPList.Checked;
 			BundleIDEdit.Enabled = RBModifyInfoPList.Checked;
+			BundleShortVersionStringEditor.Enabled = RBModifyInfoPList.Checked;
+			BundleVersionEditor.Enabled = RBModifyInfoPList.Checked;
+			SupportsDocumentBrowser.Enabled = RBModifyInfoPList.Checked;
+
+			if(RBModifyInfoPList.Checked)
+            {
+				SetModifyInfoPListItemValues();
+			}
 
 			if (!RBReplaceInfoPList.Checked)
 			{
 				ImportedPListData = null;
 			}
+		}
+
+		private void SetModifyInfoPListItemValues(bool Force=false)
+        {
+			if (!RBModifyInfoPList.Checked)
+			{
+				CleanModifyInfoPListItemValues();
+				return;
+			}
+
+			if (!Force && !string.IsNullOrEmpty(DisplayNameEdit.Text))
+            {
+				return;
+            }
+
+			string ipaFilePath = IPAFilenameEdit.Text;
+            if (!File.Exists(ipaFilePath))
+            {
+				return;
+            }
+
+			FileOperations.FileSystemAdapter IPA = new FileOperations.ReadOnlyZipFileSystem(ipaFilePath);
+
+			if (IPA != null)
+			{
+				byte[] DataToSave = IPA.ReadAllBytes("Info.plist");
+				Utilities.PListHelper InfoPlist = new Utilities.PListHelper(Encoding.UTF8.GetString(DataToSave));
+
+				if (InfoPlist.GetString("CFBundleName", out string CFBundleName))
+				{
+					DisplayNameEdit.Text = CFBundleName;
+				}
+				else
+				{
+					DisplayNameEdit.Text = string.Empty;
+				}
+
+				if (InfoPlist.GetString("CFBundleIdentifier", out string CFBundleIdentifier))
+				{
+					BundleIDEdit.Text = CFBundleIdentifier;
+				}
+				else
+				{
+					BundleIDEdit.Text = string.Empty;
+				}
+
+				if (InfoPlist.GetString("CFBundleShortVersionString", out string CFBundleShortVersionString))
+				{
+					BundleShortVersionStringEditor.Text = CFBundleShortVersionString;
+				}
+				else
+				{
+					BundleShortVersionStringEditor.Text = string.Empty;
+				}
+
+				if (InfoPlist.GetString("CFBundleVersion", out string CFBundleVersion))
+				{
+					BundleVersionEditor.Text = CFBundleVersion;
+				}
+				else
+				{
+					BundleVersionEditor.Text = string.Empty;
+				}
+
+				if (InfoPlist.GetString("UISupportsDocumentBrowser", out string UISupportsDocumentBrowser))
+				{
+					SupportsDocumentBrowser.Text = UISupportsDocumentBrowser;
+				}
+				else
+				{
+					SupportsDocumentBrowser.Text = string.Empty;
+				}
+
+			}
+		}
+
+		private void CleanModifyInfoPListItemValues()
+		{
+			DisplayNameEdit.Text = string.Empty;
+			BundleIDEdit.Text = string.Empty;
+			BundleShortVersionStringEditor.Text = string.Empty;
+			BundleVersionEditor.Text = string.Empty;
+			SupportsDocumentBrowser.Text = string.Empty;
 		}
 
 		private void SwitchingSigningMode(object sender, EventArgs e)
@@ -274,7 +366,7 @@ namespace iPhonePackager
 				// Custom cert?
 				if (RBUseExplicitCert.Checked)
 				{
-					string CertificatePassword = "";
+					string CertificatePassword = PasswordEdit.Text;
 					try
 					{
 						SigningContext.CustomSigningCert = new X509Certificate2(CertificateEdit.Text, CertificatePassword, X509KeyStorageFlags.PersistKeySet | X509KeyStorageFlags.Exportable | X509KeyStorageFlags.MachineKeySet);
@@ -310,6 +402,20 @@ namespace iPhonePackager
 				{
 					SigningContext.Info.SetString("CFBundleDisplayName", DisplayNameEdit.Text);
 					SigningContext.Info.SetString("CFBundleIdentifier", BundleIDEdit.Text);
+					SigningContext.Info.SetString("CFBundleShortVersionString", BundleShortVersionStringEditor.Text);
+					SigningContext.Info.SetString("CFBundleVersion", BundleVersionEditor.Text);
+
+                    if (!string.IsNullOrEmpty(SupportsDocumentBrowser.Text))
+                    {
+						SigningContext.Info.SetValueForKey("UISupportsDocumentBrowser", SupportsDocumentBrowser.Text.Trim().ToLower() == "true" || SupportsDocumentBrowser.Text.Trim() != "0");
+					}
+                    else
+                    {
+						if (SigningContext.Info.HasKey("UISupportsDocumentBrowser"))
+						{
+							SigningContext.Info.RemoveKeyValue("UISupportsDocumentBrowser");
+						}
+					}
 				}
 
 				// Re-sign the executable
@@ -640,9 +746,5 @@ namespace iPhonePackager
 				Program.ProgressDialog.ShowDialog();
 			}
 		}
-
-		private void exportCertificateToolStripMenuItem_Click(object sender, EventArgs e)
-		{
-		}
-	}
+    }
 }
