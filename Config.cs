@@ -402,6 +402,11 @@ namespace iPhonePackager
 		public static string Certificate = "";
 
 		/// <summary>
+		/// Certificate Password
+		/// </summary>
+		public static string CertificatePassword = "";
+
+		/// <summary>
 		/// Certificate to be output
 		/// </summary>
 		public static string OutputCertificate = null;

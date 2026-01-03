@@ -251,7 +251,7 @@ namespace iPhonePackager
 					else
 					{
 						// Load the certificate
-						string CertificatePassword = "";
+						string CertificatePassword = Config.CertificatePassword;
 						X509Certificate2 Cert = null;
 						try
 						{
