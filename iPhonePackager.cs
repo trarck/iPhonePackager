@@ -497,6 +497,17 @@ namespace iPhonePackager
                                 return false;
                             }
                         }
+                        else if (Arg == "-certificatePassword")
+                        {
+                            if (Arguments.Length > ArgIndex + 1)
+                            {
+                                Config.CertificatePassword = Arguments[++ArgIndex];
+                            }
+                            else
+                            {
+                                return false;
+                            }
+                        }
                         else if (Arg == "-outputcertificate")
                         {
                             if (Arguments.Length > ArgIndex + 1)
