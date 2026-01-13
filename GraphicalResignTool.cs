@@ -194,9 +194,9 @@ namespace iPhonePackager
 				byte[] DataToSave = IPA.ReadAllBytes("Info.plist");
 				Utilities.PListHelper InfoPlist = new Utilities.PListHelper(Encoding.UTF8.GetString(DataToSave));
 
-				if (InfoPlist.GetString("CFBundleName", out string CFBundleName))
+				if (InfoPlist.GetString("CFBundleDisplayName", out string CFBundleDisplayName))
 				{
-					DisplayNameEdit.Text = CFBundleName;
+					DisplayNameEdit.Text = CFBundleDisplayName;
 				}
 				else
 				{
